@@ -14,17 +14,17 @@ automoblie = pd.read_csv('Automobile_data.csv')
 #print(automoblie.describe())
 
 #cleaning data
-#print(automoblie.isnull().sum())
+print(automoblie.isnull().sum())
 
 # # # #cleaning the normalized data
 # # # # Find out number of records having '?' value for normalized losses
-#print(automoblie['normalized-losses'].loc[automoblie['normalized-losses'] == '?'].count())
+print(automoblie['normalized-losses'].loc[automoblie['normalized-losses'] == '?'].count())
 
 
 # # # #setting missing to mean
 # # # # Setting the missing value to mean of normalized losses and conver the datatype to integer
 
-#nl =automoblie['normalized-losses'].loc[automoblie['normalized-losses'] != '?']
+nl =automoblie['normalized-losses'].loc[automoblie['normalized-losses'] != '?']
 #nlmean = nl.astype(str).astype(int).mean()
 #automoblie['normalized-losses'] = automoblie['normalized-losses'].replace('?',nlmean).astype(int)
 #print(automoblie['normalized-losses'].head())
@@ -33,21 +33,21 @@ automoblie = pd.read_csv('Automobile_data.csv')
 
 # # #cleaning price data
 # # # Find out the number of values which are not 
-#print(automoblie['price'].str.isnumeric().value_counts())
+print(automoblie['price'].str.isnumeric().value_counts())
 
 # # #List out the values which are not numeric
 #print(automoblie['price'].loc[automoblie['price'].str.isnumeric() ==False])
 
 
 # # #Setting the missing value to mean of price and convert the datatype to integer
-#price = automoblie['price'].loc[automoblie['price'] != '?']
+price = automoblie['price'].loc[automoblie['price'] != '?']
 #pmean = price.astype(str).astype(int).mean()
 #automoblie['price'] = automoblie['price'].replace('?',pmean).astype(int)
 #print(automoblie['price'].head())
 
 # # #Checking the numberic and replacing with mean value and conver the datatype to integer
 
-#automoblie['horsepower'].str.isnumeric().value_counts()
+automoblie['horsepower'].str.isnumeric().value_counts()
 #horsepower = automoblie['horsepower'].loc[automoblie['horsepower'] != '?']
 #hpmean = horsepower.astype(str).astype(int).mean()
 #automoblie['horsepower'] =automoblie['horsepower'].replace('?',pmean).astype(int)
