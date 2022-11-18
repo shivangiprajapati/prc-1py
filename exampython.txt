@@ -1,0 +1,120 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+  
+
+#reading data
+automoblie = pd.read_csv('Automobile_data.csv')
+#print(automoblie.head())
+
+#getting datatypes
+#print(automoblie.dtypes)
+
+#getting statistics
+#print(automoblie.describe())
+
+#cleaning data
+#print(automoblie.isnull().sum())
+
+# # # #cleaning the normalized data
+# # # # Find out number of records having '?' value for normalized losses
+#print(automoblie['normalized-losses'].loc[automoblie['normalized-losses'] == '?'].count())
+
+
+# # # #setting missing to mean
+# # # # Setting the missing value to mean of normalized losses and conver the datatype to integer
+
+#nl =automoblie['normalized-losses'].loc[automoblie['normalized-losses'] != '?']
+#nlmean = nl.astype(str).astype(int).mean()
+#automoblie['normalized-losses'] = automoblie['normalized-losses'].replace('?',nlmean).astype(int)
+#print(automoblie['normalized-losses'].head())
+
+
+
+# # #cleaning price data
+# # # Find out the number of values which are not 
+#print(automoblie['price'].str.isnumeric().value_counts())
+
+# # #List out the values which are not numeric
+#print(automoblie['price'].loc[automoblie['price'].str.isnumeric() ==False])
+
+
+# # #Setting the missing value to mean of price and convert the datatype to integer
+#price = automoblie['price'].loc[automoblie['price'] != '?']
+#pmean = price.astype(str).astype(int).mean()
+#automoblie['price'] = automoblie['price'].replace('?',pmean).astype(int)
+#print(automoblie['price'].head())
+
+# # #Checking the numberic and replacing with mean value and conver the datatype to integer
+
+#automoblie['horsepower'].str.isnumeric().value_counts()
+#horsepower = automoblie['horsepower'].loc[automoblie['horsepower'] != '?']
+#hpmean = horsepower.astype(str).astype(int).mean()
+#automoblie['horsepower'] =automoblie['horsepower'].replace('?',pmean).astype(int)
+
+
+# # #Checking the outlier of horsepower
+print(automoblie.loc[automoblie['horsepower'] > 10000])
+
+
+# # #Excluding the outlier data for horsepower
+print(automoblie[np.abs(automoblie.horsepower - automoblie.horsepower.mean()) <= (3*automoblie.horsepower.std())])
+
+
+# # #Find out the number of invalid value
+print(automoblie['bore'].loc[automoblie['bore'] == '?'])
+
+# # #Replace the non-numeric value to null and convert the datatype
+
+automoblie['bore'] = pd.to_numeric(automoblie['bore'],errors='coerce')
+print(automoblie.dtypes)
+
+
+# # #Replace the non-number value to null and convert the datatype
+automoblie['stroke'] = pd.to_numeric(automoblie['stroke'],errors='coerce')
+print(automoblie.dtypes)
+
+# # #Convert the non-numeric data to null and convert the datatype
+automoblie['peak-rpm'] = pd.to_numeric(automoblie['peak-rpm'],errors='coerce')
+print(automoblie.dtypes)
+
+
+# # #remove the records which are having the value '?'
+automoblie = automoblie[automoblie['num-of-doors'] != '?']
+automoblie['num-of-doors'].loc[automoblie['num-of-doors'] == '?']
+ 
+#automoblie.make.value_counts().nlargest(10).plot(kind='bar', figsize=(15,5))
+#plt.title('Number of vehicles by make')
+#plt.ylabel('Number of vehicles')
+#plt.xlabel('Risk rating')
+
+
+#automoblie.symboling.hist(bins=6,color='purple')
+#plt.title("Insurance risk ratings of vehicles")
+#plt.ylabel('Number of vehicles')
+#plt.xlabel('Risk rating')
+   
+#['normalized-losses'].hist(bins=5,color="green")
+#plt.title("Normalized losses og vehicles")
+#plt.ylabel('Number of vehicles')
+#plt.xlabel('Normalized losses')
+
+#automoblie['fuel-type'].value_counts().plot(kind='bar',color='purple')
+#plt.title("fule type frequence diagram")
+#plt.ylabel('Number of vehicles')
+#plt.xlabel('fuel type')
+
+#automoblie['aspiration'].value_counts().plot.pie(figsize=(6,6),autopct='%.2f')
+#plt.title("Aspiration pie diagram")
+
+#automoblie.horsepower[np.abs(automoblie.horsepower-automoblie.horsepower.mean())<=(3*automoblie.horsepower.std())].hist(bins=5,color='orange')
+#plt.title("Horse power histogram")
+#plt.ylabel('Number of vehicles')
+#plt.xlabel('Horse power')
+
+#automoblie['num-of-doors'].value_counts().plot(kind='bar',color='red')
+#plt.title("Number of doors frequency diagram")
+#plt.ylabel('Number of vehicles')
+#plt.xlabel('Number of doors')
+
+
